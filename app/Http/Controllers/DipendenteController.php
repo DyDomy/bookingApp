@@ -20,7 +20,7 @@ class DipendenteController extends Controller
 
     public function create()
     {
-        $negozi = Negozio::where('propietario_id', Auth::id())->get();
+        $negozi = Negozio::where('proprietario_id', Auth::id())->get();
         return view('dipendenti.create', compact('negozi'));
     }
 
@@ -41,9 +41,10 @@ class DipendenteController extends Controller
     public function edit(Dipendente $dipendente)
     {
 
-        if ($dipendente->negozio_id != auth()->user()->negozi->pluck('id')->first()) {
+        if (!auth()->user()->negozi->pluck('id')->contains($dipendente->negozio_id)) {
             abort(403, 'Non sei autorizzato a modificare questo dipendente');
         }
+
 
         $negozi = Negozio::where('proprietario_id', Auth::id())->get();
         return view('dipendenti.edit', compact('dipendente', 'negozi'));
@@ -51,7 +52,7 @@ class DipendenteController extends Controller
 
     public function update(Request $request, Dipendente $dipendente)
     {
-        if ($dipendente->negozio_id != auth()->user()->negozi->pluck('id')->first()) {
+        if (!auth()->user()->negozi->pluck('id')->contains($dipendente->negozio_id)) {
             abort(403, 'Non sei autorizzato a modificare questo dipendente');
         }
 
@@ -67,7 +68,7 @@ class DipendenteController extends Controller
 
     public function destroy(Dipendente $dipendente)
     {
-        if ($dipendente->negozio_id != auth()->user()->negozi->pluck('id')->first()) {
+        if (!auth()->user()->negozi->pluck('id')->contains($dipendente->negozio_id)) {
             abort(403, 'Non sei autorizzato a modificare questo dipendente');
         }
 

@@ -33,6 +33,9 @@
                         <li class="nav__item">
                             <a class="nav__link" href="{{ route('servizi.index') }}">Servizi</a>
                         </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="{{ route('disponibilita.index') }}">Disponibilita</a>
+                        </li>
                     @endif
                     <li class="nav__item">
                         <a class="nav__link" href="{{ route('logout') }}"

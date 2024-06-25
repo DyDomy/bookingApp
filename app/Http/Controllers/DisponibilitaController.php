@@ -74,30 +74,6 @@ class DisponibilitaController extends Controller
         return redirect()->route('disponibilita.index')->with('success', 'Disponibilità aggiornata con successo!');
     }
 
-    public function getGiornoFromDate($date)
-    {
-        $giornoSettimana = date('l', strtotime($date)); // Ottiene il giorno della settimana (es. Monday)
-        // Mappa il giorno della settimana a quello che hai nel database, ad esempio:
-        switch ($giornoSettimana) {
-            case 'Monday':
-                return 'Lunedi';
-            case 'Tuesday':
-                return 'Martedi';
-            case 'Wednesday':
-                return 'Mercoledi';
-            case 'Thursday':
-                return 'Giovedi';
-            case 'Friday':
-                return 'Venerdi';
-            case 'Saturday':
-                return 'Sabato';
-            case 'Sunday':
-                return 'Domenica';
-            default:
-                return null;
-        }
-    }
-
     public function getDisponibilita(Negozio $negozio, Request $request)
     {
         $data = $request->input('data');
