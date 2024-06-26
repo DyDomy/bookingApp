@@ -64,14 +64,18 @@ class PrenotazioneController extends Controller
 
     public function show(Prenotazione $prenotazione)
     {
-        $this->authorize('view', $prenotazione);
+        if (auth()->user()->cannot('view', $prenotazione)) {
+            abort(403, 'Non sei autorizzato a visualizzare questa prenotazione');
+        }
 
         return view('prenotazioni.show', compact('prenotazione'));
     }
 
     public function destroy(Prenotazione $prenotazione)
     {
-        $this->authorize('delete', $prenotazione);
+        if (auth()->user()->cannot('view', $prenotazione)) {
+            abort(403, 'Non sei autorizzato a visualizzare questa prenotazione');
+        }
 
         $prenotazione->delete();
 
